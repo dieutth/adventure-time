@@ -85,14 +85,13 @@
   </main>
 
   <button class="emergency-button" id="emergency-button" type="button" aria-expanded="false" aria-controls="emergency-panel">Emergency</button>
-  <section class="emergency-panel" id="emergency-panel" aria-label="Emergency test unlock" hidden><p><strong>Passcode to reveal next question</strong></p><form id="emergency-form"><label for="emergency-code">Passcode</label><input id="emergency-code" type="text" autocomplete="off" required><button type="submit">Reveal next question</button><p class="message" id="emergency-message" aria-live="polite"></p></form></section>
+  <section class="emergency-panel" id="emergency-panel" aria-label="Emergency test unlock" hidden><p><strong>Passcode to reveal next question</strong></p><form id="emergency-form"><label for="emergency-code">Passcode</label><input id="emergency-code" type="password" inputmode="numeric" autocomplete="off" autocapitalize="off" spellcheck="false" required><button type="submit">Reveal next question</button><p class="message" id="emergency-message" aria-live="polite"></p></form></section>
   <section id="celebration-scene" aria-label="Congratulations" aria-live="polite" hidden><div class="night-stars" aria-hidden="true"></div><canvas id="fireworks" aria-hidden="true"></canvas><h2 class="love-title">Random Acts of Love</h2></section>
   <script>
     const bestCut = { latitude: 47.31250324218141, longitude: 8.525313544559133 };
     const bridge = { latitude: 47.3789893011236, longitude: 8.533852655245003 };
     const paopao = { latitude: 47.41155872341203, longitude: 8.543735368614621 };
     const stepIds = ["step-one", "step-two", "step-three", "step-four", "step-five", "step-six"];
-    const stepCodeTargets = { r1: "step-two", r2: "step-three", r3: "step-four", r4: "step-five", r5: "step-six" };
     const arrivalRadiusMeters = 20, maxGpsAccuracyMeters = 50;
     let bestCutWatchId = null, bridgeWatchId = null, paopaoWatchId = null, paopaoArrived = false, taskTimerId = null, taskUnlockAt = null, nextTaskUnlocked = false, celebrationStarted = false;
 
@@ -141,10 +140,8 @@
       updateTimer(); taskTimerId = setInterval(updateTimer, 1000);
     }
     function advanceEmergency(code) {
-      const normalized = code.trim().toLowerCase(), match = normalized.match(/^random act of love\s*-\s*(r[1-5])$/);
-      let target = match ? stepCodeTargets[match[1]] : null;
-      if (normalized !== "random act of love" && !target) return false;
-      if (!target) target = stepIds.find(id => id !== "step-one" && document.getElementById(id).hidden);
+      if (code.trim() !== "3210") return false;
+      const target = stepIds.find(id => id !== "step-one" && document.getElementById(id).hidden);
       if (!target || (target === "step-six" && !paopaoArrived)) return false;
       const focus = { "step-two": "answer-two", "step-three": "answer-three", "step-four": null, "step-five": "answer-five", "step-six": "final-answer" }[target];
       const revealed = revealStep(target, focus);
@@ -226,11 +223,20 @@
         }
       } else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
     });
-    document.getElementById("emergency-button").addEventListener("click", () => { const panel = document.getElementById("emergency-panel"); panel.hidden = !panel.hidden; document.getElementById("emergency-button").setAttribute("aria-expanded", String(!panel.hidden)); if (!panel.hidden) document.getElementById("emergency-code").focus(); });
+    document.getElementById("emergency-button").addEventListener("click", () => {
+      const panel = document.getElementById("emergency-panel"), input = document.getElementById("emergency-code");
+      panel.hidden = !panel.hidden;
+      input.value = "";
+      document.getElementById("emergency-button").setAttribute("aria-expanded", String(!panel.hidden));
+      if (!panel.hidden) input.focus();
+    });
     document.getElementById("emergency-form").addEventListener("submit", event => {
-      event.preventDefault(); const message = document.getElementById("emergency-message");
-      if (advanceEmergency(document.getElementById("emergency-code").value)) { message.textContent = "Got you, babe! The next question or task is ready."; message.classList.add("success"); document.getElementById("emergency-panel").hidden = true; document.getElementById("emergency-button").setAttribute("aria-expanded", "false"); }
-      else { message.textContent = "That code didn't unlock a new step—check the code or try the next r-number, babe."; message.classList.remove("success"); }
+      event.preventDefault();
+      const input = document.getElementById("emergency-code"), code = input.value;
+      input.value = "";
+      const message = document.getElementById("emergency-message");
+      if (advanceEmergency(code)) { message.textContent = "Got you, babe! The next question or task is ready."; message.classList.add("success"); document.getElementById("emergency-panel").hidden = true; document.getElementById("emergency-button").setAttribute("aria-expanded", "false"); }
+      else { message.textContent = "That code didn't unlock a new step—check the code and try again, babe."; message.classList.remove("success"); }
     });
     document.getElementById("final-answer-form").addEventListener("submit", event => {
       event.preventDefault(); const answer = document.getElementById("final-answer").value.trim().toLowerCase(), message = document.getElementById("final-message");
