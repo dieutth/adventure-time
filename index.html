@@ -90,10 +90,11 @@
   <script>
     const bestCut = { latitude: 47.31250324218141, longitude: 8.525313544559133 };
     const bridge = { latitude: 47.3789893011236, longitude: 8.533852655245003 };
+    const paopao = { latitude: 47.41155872341203, longitude: 8.543735368614621 };
     const stepIds = ["step-one", "step-two", "step-three", "step-four", "step-five", "step-six"];
     const stepCodeTargets = { r1: "step-two", r2: "step-three", r3: "step-four", r4: "step-five", r5: "step-six" };
     const arrivalRadiusMeters = 20, maxGpsAccuracyMeters = 50;
-    let bestCutWatchId = null, bridgeWatchId = null, taskTimerId = null, taskUnlockAt = null, nextTaskUnlocked = false, celebrationStarted = false;
+    let bestCutWatchId = null, bridgeWatchId = null, paopaoWatchId = null, paopaoArrived = false, taskTimerId = null, taskUnlockAt = null, nextTaskUnlocked = false, celebrationStarted = false;
 
     function revealStep(id, focusId) {
       const step = document.getElementById(id);
@@ -144,7 +145,7 @@
       let target = match ? stepCodeTargets[match[1]] : null;
       if (normalized !== "random act of love" && !target) return false;
       if (!target) target = stepIds.find(id => id !== "step-one" && document.getElementById(id).hidden);
-      if (!target) return false;
+      if (!target || (target === "step-six" && !paopaoArrived)) return false;
       const focus = { "step-two": "answer-two", "step-three": "answer-three", "step-four": null, "step-five": "answer-five", "step-six": "final-answer" }[target];
       const revealed = revealStep(target, focus);
       if (target === "step-four") { document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; document.getElementById("dare-task").hidden = true; document.getElementById("task-confirm-form").hidden = false; document.getElementById("answer-four-form").hidden = true; }
@@ -211,8 +212,19 @@
     });
     document.getElementById("answer-five-form").addEventListener("submit", event => {
       event.preventDefault(); const message = document.getElementById("message-five");
-      if (document.getElementById("answer-five").value.trim().toLowerCase() === "paopao") { message.textContent = "Wowowow, babe's correct, nicely done wow."; message.classList.add("success"); revealStep("step-six", "final-answer"); }
-      else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
+      if (document.getElementById("answer-five").value.trim().toLowerCase() === "paopao") {
+        message.textContent = "Wowowow, babe's correct, nicely done wow. Head to Paopao!"; message.classList.add("success");
+        if (!navigator.geolocation) { message.textContent = "Location tracking isn't available in this browser. Enable location services to reveal the final task."; return; }
+        if (paopaoWatchId === null && !paopaoArrived) {
+          paopaoWatchId = watchDestination(paopao, message, () => {
+            if (paopaoWatchId !== null) { navigator.geolocation.clearWatch(paopaoWatchId); paopaoWatchId = null; }
+            paopaoArrived = true;
+            message.textContent = "You've arrived at Paopao! Here's the final task.";
+            revealStep("step-six", "final-answer");
+          });
+          if (paopaoWatchId !== null) message.textContent = "Head to Paopao and keep this page open. The final task unlocks when you arrive.";
+        }
+      } else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
     });
     document.getElementById("emergency-button").addEventListener("click", () => { const panel = document.getElementById("emergency-panel"); panel.hidden = !panel.hidden; document.getElementById("emergency-button").setAttribute("aria-expanded", String(!panel.hidden)); if (!panel.hidden) document.getElementById("emergency-code").focus(); });
     document.getElementById("emergency-form").addEventListener("submit", event => {
