@@ -1,74 +1,145 @@
 <!doctype html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <meta name="theme-color" content="#f6f1e8">
+
   <title>Travel around town with babe</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+
     :root { color-scheme: light; font-family: "Fredoka", "Trebuchet MS", system-ui, sans-serif; font-size: 18px; color: #25231f; background: #f6f1e8; }
+
     * { box-sizing: border-box; }
+
     body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; }
+
     main { width: min(100%, 560px); padding: clamp(24px, 6vw, 48px); border: 1px solid #e6dece; border-radius: 24px; background: #fffdf9; box-shadow: 0 16px 48px rgb(52 43 29 / 9%); }
+
     .eyebrow-line { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+
     .eyebrow { margin: 0; color: #8b6842; font-size: .95rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
     h1 { margin: 0; font-size: clamp(2.4rem, 9vw, 3.5rem); font-weight: 700; line-height: 1.08; }
+
     .intro { margin: 16px 0 32px; color: #68635b; font-size: 1.2rem; font-weight: 600; line-height: 1.5; }
+
     .heart { color: #d8293f; font-size: 1.15rem; }
+
     .step { padding-top: 24px; border-top: 1px solid #eee8dd; }
+
     .step[hidden], [hidden] { display: none !important; }
+
     .step-label { margin: 0 0 8px; color: #8b6842; font-size: 1rem; font-weight: 700; }
+
     .riddle { margin: 0 0 20px; font-size: 1.55rem; font-weight: 600; line-height: 1.4; }
+
     form { display: flex; flex-direction: column; gap: 12px; }
+
     label { font-size: 1.05rem; font-weight: 600; }
+
     input { width: 100%; padding: 14px 15px; border: 1px solid #d8d0c3; border-radius: 12px; background: #fff; color: inherit; font: inherit; }
+
     input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #c9975b; outline-offset: 3px; }
+
     button, .map-link { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; padding: 12px 18px; border: 0; border-radius: 14px; background: #765435; color: #fff; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+
     button:hover, .map-link:hover { background: #5e4028; }
+
     .message { min-height: 1.5em; margin: 4px 0 0; color: #a13d32; font-size: 1rem; line-height: 1.5; }
+
     .message.success { color: #286342; }
+
     .riddle-closure { margin-top: 18px; padding: 14px; border: 1px solid #e6dece; border-radius: 18px; background: #fffaf7; text-align: center; }
+
     .riddle-closure iframe { display: block; width: 100%; max-width: 420px; height: 330px; margin: 0 auto; border: 0; border-radius: 12px; }
+
     .closure-caption { margin: 12px 0; color: #68635b; font-weight: 600; }
+
     .map-link { margin-top: 16px; }
+
     .walking { margin-top: 24px; }
+
     .walking p { font-size: 1.05rem; line-height: 1.55; }
+
     .walking iframe, .celebration iframe, .walking-gif { display: block; width: 100%; max-width: 400px; height: 250px; margin: 16px auto; border: 0; border-radius: 12px; }
+
     .bridge-art { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 5vw, 40px); margin: 12px 0 24px; padding: 20px; border-radius: 20px; background: #fff4f5; }
+
     .bridge-art svg { width: min(48%, 210px); height: auto; }
+
     .modern-shirt-art { width: min(74%, 250px); height: auto; display: block; filter: drop-shadow(0 8px 18px rgb(119 83 68 / 18%)); }
+
     .finger-heart { font-size: clamp(4rem, 18vw, 7rem); line-height: 1; }
+
     .task-reveal { margin: 18px 0; padding: 20px; border: 1px solid #e6dece; border-radius: 18px; background: #fffaf7; text-align: center; }
+
     .task-reveal-title { margin: 0 0 10px; color: #765435; font-size: 1.1rem; font-weight: 700; }
+
     .timer { margin: 0; color: #493448; font-size: clamp(3rem, 13vw, 4.5rem); font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+
     .dare-box, .confirm-box { margin: 16px 0; padding: 18px; border: 1px solid #e6dece; border-radius: 16px; background: #fff; }
+
     .dare-box p, .confirm-box p { margin: 0 0 14px; font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
+
     .dare-task { margin: 18px 0; padding: 16px; border: 1px solid #e6dece; border-radius: 16px; background: #fffaf7; }
+
     .dare-task p { margin: 0; font-weight: 600; line-height: 1.5; }
+
     .emergency-button { position: fixed; z-index: 10; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); background: #a13d32; box-shadow: 0 4px 14px rgb(52 43 29 / 16%); }
+
     .emergency-button:hover { background: #812e26; }
+
     .emergency-panel { position: fixed; z-index: 11; top: max(78px, calc(env(safe-area-inset-top) + 62px)); right: max(16px, env(safe-area-inset-right)); width: min(340px, calc(100vw - 32px)); padding: 18px 18px 16px; border: 1px solid #e6dece; border-radius: 18px; background: #fffdf9; box-shadow: 0 18px 38px rgb(52 43 29 / 10%); }
+
     .emergency-panel p { margin: 0 0 12px; }
+
     body.celebrating { display: block; padding: 0; overflow: hidden; background: #070b20; }
+
     body.celebrating main { opacity: 0; transform: translateY(-28px) scale(.94); filter: blur(8px); pointer-events: none; }
+
     #celebration-scene { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; overflow: hidden; color: #fff; background: radial-gradient(ellipse at 50% 110%, #27305d 0, #101631 52%, #050914 100%); opacity: 0; transition: opacity .4s ease; }
+
     #celebration-scene.visible { opacity: 1; } #celebration-scene[hidden] { display: none; }
+
     #fireworks { position: absolute; inset: 0; width: 100%; height: 100%; }
+
     .night-stars { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(2px 2px at 12% 18%, #fff 50%, transparent 60%), radial-gradient(1px 1px at 30% 42%, #fff 50%, transparent 60%), radial-gradient(2px 2px at 50% 70%, #fff 50%, transparent 60%), radial-gradient(1px 1px at 74% 24%, #fff 50%, transparent 60%), radial-gradient(1px 1px at 88% 80%, #fff 50%, transparent 60%); opacity: .85; }
+
     .love-title { z-index: 1; margin: 0; padding: 24px; color: #fff2bd; font-size: clamp(2.5rem, 9vw, 6rem); font-weight: 700; text-align: center; text-shadow: 0 0 12px #ff71a8, 0 0 32px #ff71a8, 0 0 48px #ff71a8; animation: blink-glow 2.5s ease-in-out infinite; }
+
     @keyframes blink-glow { 50% { opacity: .3; text-shadow: 0 0 4px #ff71a8; } }
+
     .step.revealed { animation: step-reveal .7s ease both; }
+
     @keyframes step-reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
     @media (max-width: 420px) { :root { font-size: 17px; } main { padding: 24px; } .riddle { font-size: 1.4rem; } .riddle-closure iframe { height: 280px; } }
+
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } .love-title { animation: none; } }
+
   </style>
+
 </head>
+
 <body>
+
   <main id="adventure">
+
     <div class="eyebrow-line"><p class="eyebrow">A little adventure</p><span class="heart" aria-hidden="true">♥</span></div>
+
     <h1>Travel around town with babe</h1><p class="intro">Let's gooooo</p>
 
     <section class="step" id="step-one" aria-labelledby="riddle-one"><p class="step-label">Riddle 1</p><h2 class="riddle" id="riddle-one">Birthday cake and a gift—what phrase do they make?</h2><form id="answer-one-form"><label for="answer-one">Babe's answer</label><input id="answer-one" type="text" autocomplete="off" required><button type="submit">Unlock the next riddle</button></form><p class="message" id="message-one" aria-live="polite"></p><div class="riddle-closure" id="riddle-one-closure" hidden><iframe src="https://tenor.com/embed/21442917" title="Aggressive love from a fat cat cartoon" loading="lazy" allowfullscreen></iframe><p class="closure-caption">Riddle 1 complete! A little love from the kitty 💗</p><button id="continue-to-two" type="button">On to riddle 2</button></div></section>
@@ -79,171 +150,336 @@
 
     <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task</p><div class="task-reveal" id="task-four-timer" hidden><p class="task-reveal-title">Next Riddle reveal in</p><p class="timer" id="task-timer" role="timer" aria-live="polite">50:00</p></div><div class="dare-box" id="dare-box" hidden><p>I'll do a Dare to have the Riddle showing to me Early</p><button type="button" id="task-early-button">I'll do a dare</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask babe for the dare code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Reveal it early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><div class="dare-task" id="dare-task" hidden><p>Babe's task: sing a full song, then give a hug.</p></div><div class="confirm-box" id="confirm-box"><p>Confirm task done</p><form id="task-confirm-form"><label for="task-confirm-code">Code</label><input id="task-confirm-code" type="text" autocomplete="off" required><button type="submit">Confirm task done</button><p class="message" id="task-confirm-message" aria-live="polite"></p></form></div><form id="answer-four-form" hidden><h2 class="riddle" id="riddle-four">Noodle me this: I am a path that walks on air. To cross the void, if you should dare.</h2><label for="answer-four">Babe's answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the location</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><iframe src="https://tenor.com/embed/20311095" title="Two cats walking together" loading="lazy" allowfullscreen></iframe></div></section>
 
-    <section class="step" id="step-five" aria-labelledby="riddle-five" hidden><p class="step-label">Riddle 4</p><h2 class="riddle" id="riddle-five">What does this cute T-shirt say, and what Korean celebrity finger-heart pose is shown?</h2><div class="bridge-art" role="img" aria-label="A cute pink T-shirt with the word MODERN and a finger-heart hand gesture"><svg viewBox="0 0 220 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M65 25 91 12h38l26 13 43 34-24 35-23-15v126H39V79L16 94-8 59l47-34 26 0Z" transform="translate(10 5)" fill="#ffb8cb" stroke="#d76b8b" stroke-width="5" stroke-linejoin="round"/><path d="M91 13c2 18 12 28 19 28s17-10 19-28" fill="#fff4f5" stroke="#d76b8b" stroke-width="4" stroke-linejoin="round"/><text x="110" y="116" text-anchor="middle" fill="#6c4660" font-family="Trebuchet MS, sans-serif" font-size="23" font-weight="700" letter-spacing="1">MODERN</text><path d="M74 139c12-12 22-12 36 0 14-12 24-12 36 0-5 20-20 31-36 31s-31-11-36-31Z" fill="#fff4f5" stroke="#e88ca5" stroke-width="3"/><path d="m103 148 7 7 7-7" fill="none" stroke="#d8293f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="110" cy="155" r="3" fill="#d8293f"/><circle cx="77" cy="69" r="4" fill="#fff4f5"/><circle cx="149" cy="82" r="4" fill="#fff4f5"/></svg><span class="finger-heart" aria-hidden="true">🫰</span></div><p>Enter the location answer to continue.</p><form id="answer-five-form"><label for="answer-five">Babe's answer</label><input id="answer-five" name="answer" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-five" aria-live="polite"></p></form></section>
+    <!-- Modified: Removed text label heading, only displaying the pink shirt visual art. -->
+    <section class="step" id="step-five" aria-labelledby="riddle-five" hidden><p class="step-label">Riddle 4</p><div class="bridge-art" role="img" aria-label="A cute pink T-shirt with the word MODERN and a finger-heart hand gesture"><svg viewBox="0 0 220 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M65 25 91 12h38l26 13 43 34-24 35-23-15v126H39V79L16 94-8 59l47-34 26 0Z" transform="translate(10 5)" fill="#ffb8cb" stroke="#d76b8b" stroke-width="5" stroke-linejoin="round"/><path d="M91 13c2 18 12 28 19 28s17-10 19-28" fill="#fff4f5" stroke="#d76b8b" stroke-width="4" stroke-linejoin="round"/><text x="110" y="116" text-anchor="middle" fill="#6c4660" font-family="Trebuchet MS, sans-serif" font-size="23" font-weight="700" letter-spacing="1">MODERN</text><path d="M74 139c12-12 22-12 36 0 14-12 24-12 36 0-5 20-20 31-36 31s-31-11-36-31Z" fill="#fff4f5" stroke="#e88ca5" stroke-width="3"/><path d="m103 148 7 7 7-7" fill="none" stroke="#d8293f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="110" cy="155" r="3" fill="#d8293f"/><circle cx="77" cy="69" r="4" fill="#fff4f5"/><circle cx="149" cy="82" r="4" fill="#fff4f5"/></svg><span class="finger-heart" aria-hidden="true">🫰</span></div><form id="answer-five-form"><label for="answer-five">Babe's answer</label><input id="answer-five" name="answer" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-five" aria-live="polite"></p></form></section>
 
     <section class="step" id="step-six" aria-labelledby="task-six" hidden><p class="step-label">Task</p><h2 class="riddle" id="task-six">Babe's task: take a picture and ask for the next location</h2><iframe class="walking-gif" src="https://tenor.com/embed/20311095" title="Two cats walking together" loading="lazy" allowfullscreen></iframe><form id="final-answer-form"><label for="final-answer">Final location answer</label><input id="final-answer" type="text" autocomplete="off" required><button type="submit">Reveal the ending</button><p class="message" id="final-message" aria-live="polite"></p></form></section>
+
   </main>
 
   <button class="emergency-button" id="emergency-button" type="button" aria-expanded="false" aria-controls="emergency-panel">Emergency</button>
+
   <section class="emergency-panel" id="emergency-panel" aria-label="Emergency test unlock" hidden><p><strong>Passcode to reveal next question</strong></p><form id="emergency-form"><label for="emergency-code">Passcode</label><input id="emergency-code" type="password" inputmode="numeric" autocomplete="off" autocapitalize="off" spellcheck="false" required><button type="submit">Reveal next question</button><p class="message" id="emergency-message" aria-live="polite"></p></form></section>
+
   <section id="celebration-scene" aria-label="Congratulations" aria-live="polite" hidden><div class="night-stars" aria-hidden="true"></div><canvas id="fireworks" aria-hidden="true"></canvas><h2 class="love-title">Random Acts of Love</h2></section>
+
   <script>
+
     const bestCut = { latitude: 47.31250324218141, longitude: 8.525313544559133 };
+
     const bridge = { latitude: 47.3789893011236, longitude: 8.533852655245003 };
+
     const paopao = { latitude: 47.41155872341203, longitude: 8.543735368614621 };
+
     const stepIds = ["step-one", "step-two", "step-three", "step-four", "step-five", "step-six"];
+
     const arrivalRadiusMeters = 20, maxGpsAccuracyMeters = 50;
+
     let bestCutWatchId = null, bridgeWatchId = null, paopaoWatchId = null, paopaoArrived = false, taskTimerId = null, taskUnlockAt = null, nextTaskUnlocked = false, celebrationStarted = false;
 
     function revealStep(id, focusId) {
+
       const step = document.getElementById(id);
+
       if (!step || !step.hidden) return false;
+
       step.hidden = false; step.classList.add("revealed"); step.scrollIntoView({ behavior: "smooth", block: "start" });
+
       if (focusId) window.setTimeout(() => document.getElementById(focusId)?.focus(), 350);
+
       return true;
+
     }
+
     function distanceMeters(lat1, lon1, lat2, lon2) {
+
       const rad = value => value * Math.PI / 180, dLat = rad(lat2 - lat1), dLon = rad(lon2 - lon1);
+
       const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLon / 2) ** 2;
+
       return 6371000 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
     }
+
     function watchDestination(destination, status, onArrival, isBridge = false) {
+
       if (!navigator.geolocation) { status.textContent = "Location tracking isn't available in this browser. Enable location services and try again."; return null; }
+
       status.textContent = "Waiting for your location…";
+
       return navigator.geolocation.watchPosition(position => {
+
         const accuracy = position.coords.accuracy;
+
         if (accuracy > maxGpsAccuracyMeters) { if (isBridge) status.textContent = `Heading to the Bridge… waiting for a clearer GPS fix (±${Math.round(accuracy)} m).`; return; }
+
         const distance = distanceMeters(position.coords.latitude, position.coords.longitude, destination.latitude, destination.longitude);
+
         if (distance <= arrivalRadiusMeters + accuracy) onArrival();
+
         else if (isBridge) status.textContent = `Heading to the Bridge… about ${Math.round(distance)} m away.`;
+
       }, error => { const errors = { 1: "Location access was denied. Allow it in browser settings and try again.", 2: "Your location couldn't be determined. Check that location services are enabled.", 3: "GPS took too long to respond. Keep this page open and try again where the signal is clearer." }; status.textContent = errors[error.code] || "Couldn't access your location."; }, { enableHighAccuracy: true, maximumAge: 0, timeout: 20000 });
+
     }
+
     function unlockTask(byDare = false) {
+
       if (nextTaskUnlocked) return;
+
       nextTaskUnlocked = true;
+
       if (taskTimerId !== null) { clearInterval(taskTimerId); taskTimerId = null; }
+
       document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; document.getElementById("task-early-form").hidden = true;
+
       document.getElementById("dare-task").hidden = !byDare;
+
       document.getElementById("answer-four-form").hidden = true;
+
       document.getElementById("task-confirm-form").hidden = false;
+
       document.getElementById("task-confirm-code").focus();
+
     }
+
     function updateTimer() {
+
       if (taskUnlockAt === null || nextTaskUnlocked) return;
+
       const remaining = Math.max(0, Math.ceil((taskUnlockAt - Date.now()) / 1000));
+
       document.getElementById("task-timer").textContent = `${String(Math.floor(remaining / 60)).padStart(2, "0")}:${String(remaining % 60).padStart(2, "0")}`;
+
       if (remaining === 0) unlockTask(false);
+
     }
+
     function startTimer() {
+
       if (taskUnlockAt !== null) return;
+
       taskUnlockAt = Date.now() + 50 * 60 * 1000; document.getElementById("task-four-timer").hidden = false; document.getElementById("dare-box").hidden = false;
+
       updateTimer(); taskTimerId = setInterval(updateTimer, 1000);
+
     }
+
     function advanceEmergency(code) {
+
       if (code.trim() !== "3210") return false;
+
       const target = stepIds.find(id => id !== "step-one" && document.getElementById(id).hidden);
-      if (!target || (target === "step-six" && !paopaoArrived)) return false;
-      const focus = { "step-two": "answer-two", "step-three": "answer-three", "step-four": null, "step-five": "answer-five", "step-six": "final-answer" }[target];
-      const revealed = revealStep(target, focus);
-      if (target === "step-four") { document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; document.getElementById("dare-task").hidden = true; document.getElementById("task-confirm-form").hidden = false; document.getElementById("answer-four-form").hidden = true; }
-      return revealed;
-    }
-    function launchFireworks() {
-      const canvas = document.getElementById("fireworks"), context = canvas.getContext("2d");
-      const resize = () => { const scale = window.devicePixelRatio || 1; canvas.width = window.innerWidth * scale; canvas.height = window.innerHeight * scale; context.setTransform(scale, 0, 0, scale, 0, 0); }
-      resize(); window.addEventListener("resize", resize);
-      const colors = ["#e84a70", "#f4b942", "#805ad5", "#38a3a5", "#ff7b54", "#fff2bd"], particles = [];
-      function burst() { const x = window.innerWidth * (.12 + Math.random() * .76), y = window.innerHeight * (.12 + Math.random() * .58); for (let i = 0; i < 55; i++) { const angle = Math.PI * 2 * i / 55, speed = 1 + Math.random() * 3.5; particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed - 1.2, life: 28 + Math.random() * 12, color: colors[Math.floor(Math.random() * colors.length)] }); } }
-      let frame = 0;
-      function animate() {
-        context.clearRect(0, 0, window.innerWidth, window.innerHeight); if (frame % 42 === 0) burst();
-        for (const p of particles) { if (p.life <= 0) continue; p.x += p.vx; p.y += p.vy; p.vy += .025; p.life--; context.globalAlpha = Math.min(1, p.life / 24); context.fillStyle = p.color; context.beginPath(); context.arc(p.x, p.y, 2.5, 0, Math.PI * 2); context.fill(); }
-        context.globalAlpha = 1; frame++; if (!document.getElementById("celebration-scene").hidden) requestAnimationFrame(animate);
+
+      if (!target) return false;
+
+      // Modified: Bypassed the (target === "step-six" && !paopaoArrived) check to allow bypass to final task.
+      if (target === "step-six") {
+        paopaoArrived = true;
       }
-      requestAnimationFrame(animate);
+
+      const focus = { "step-two": "answer-two", "step-three": "answer-three", "step-four": null, "step-five": "answer-five", "step-six": "final-answer" }[target];
+
+      const revealed = revealStep(target, focus);
+
+      if (target === "step-four") { document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; document.getElementById("dare-task").hidden = true; document.getElementById("task-confirm-form").hidden = false; document.getElementById("answer-four-form").hidden = true; }
+
+      return revealed;
+
     }
+
+    function launchFireworks() {
+
+      const canvas = document.getElementById("fireworks"), context = canvas.getContext("2d");
+
+      const resize = () => { const scale = window.devicePixelRatio || 1; canvas.width = window.innerWidth * scale; canvas.height = window.innerHeight * scale; context.setTransform(scale, 0, 0, scale, 0, 0); }
+
+      resize(); window.addEventListener("resize", resize);
+
+      const colors = ["#e84a70", "#f4b942", "#805ad5", "#38a3a5", "#ff7b54", "#fff2bd"], particles = [];
+
+      function burst() { const x = window.innerWidth * (.12 + Math.random() * .76), y = window.innerHeight * (.12 + Math.random() * .58); for (let i = 0; i < 55; i++) { const angle = Math.PI * 2 * i / 55, speed = 1 + Math.random() * 3.5; particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed - 1.2, life: 28 + Math.random() * 12, color: colors[Math.floor(Math.random() * colors.length)] }); } }
+
+      let frame = 0;
+
+      function animate() {
+
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight); if (frame % 42 === 0) burst();
+
+        for (const p of particles) { if (p.life <= 0) continue; p.x += p.vx; p.y += p.vy; p.vy += .025; p.life--; context.globalAlpha = Math.min(1, p.life / 24); context.fillStyle = p.color; context.beginPath(); context.arc(p.x, p.y, 2.5, 0, Math.PI * 2); context.fill(); }
+
+        context.globalAlpha = 1; frame++; if (!document.getElementById("celebration-scene").hidden) requestAnimationFrame(animate);
+
+      }
+
+      requestAnimationFrame(animate);
+
+    }
+
     function showCelebration() { const scene = document.getElementById("celebration-scene"); scene.hidden = false; requestAnimationFrame(() => { scene.classList.add("visible"); launchFireworks(); }); }
 
     document.getElementById("answer-one-form").addEventListener("submit", event => {
+
       event.preventDefault(); const message = document.getElementById("message-one");
+
       if (document.getElementById("answer-one").value.trim().toLowerCase() === "oh really really") { message.textContent = "Wowowow, babe's correct, nicely done wow."; message.classList.add("success"); document.getElementById("answer-one-form").hidden = true; document.getElementById("riddle-one-closure").hidden = false; }
+
       else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
+
     });
+
     document.getElementById("continue-to-two").addEventListener("click", () => { document.getElementById("step-one").hidden = true; revealStep("step-two", "answer-two"); });
+
     document.getElementById("answer-two-form").addEventListener("submit", event => {
+
       event.preventDefault(); const message = document.getElementById("message-two"), answer = document.getElementById("answer-two").value.trim().toLowerCase().replace(/\s+/g, " ");
+
       if (answer === "8g6g+x4 adliswil") {
+
         message.textContent = "Wowowow, babe's correct, nicely done wow. Head to Best Cut!"; message.classList.add("success"); document.getElementById("map-link").hidden = false; document.getElementById("walking").hidden = false;
+
         bestCutWatchId = watchDestination(bestCut, document.getElementById("location-status"), () => { if (bestCutWatchId !== null) { navigator.geolocation.clearWatch(bestCutWatchId); bestCutWatchId = null; } document.getElementById("location-status").textContent = "You've arrived at Best Cut! Here's the next riddle."; revealStep("step-three", "answer-three"); });
+
       } else { message.textContent = "Hmm, not quite—try again, babe."; message.classList.remove("success"); }
+
     });
+
     document.getElementById("answer-three-form").addEventListener("submit", event => {
+
       event.preventDefault(); const message = document.getElementById("message-three");
+
       if (document.getElementById("answer-three").value.trim().toLowerCase() === "selnau") { message.textContent = "Wowowow, babe's correct, nicely done wow."; message.classList.add("success"); revealStep("step-four", null); startTimer(); }
+
       else { message.textContent = "Not quite—try again, babe ahihi!"; message.classList.remove("success"); }
+
     });
+
     document.getElementById("task-early-button").addEventListener("click", () => { document.getElementById("task-early-form").hidden = false; document.getElementById("task-early-code").focus(); });
+
     document.getElementById("task-early-form").addEventListener("submit", event => {
+
       event.preventDefault(); const message = document.getElementById("task-early-message");
+
       if (document.getElementById("task-early-code").value.trim().toLowerCase() === "first of all") { message.textContent = "That's the code! Here's the next riddle early, babe."; message.classList.add("success"); unlockTask(true); }
+
       else { message.textContent = "That's not the code—try again, babe."; message.classList.remove("success"); }
+
     });
+
     document.getElementById("task-confirm-form").addEventListener("submit", event => {
+
       event.preventDefault(); const message = document.getElementById("task-confirm-message");
+
       if (document.getElementById("task-confirm-code").value.trim().toLowerCase() === "literally you could have asked") {
+
         message.textContent = "Confirmed. The riddle is ready, babe."; message.classList.add("success");
+
         document.getElementById("task-confirm-form").hidden = true;
+
         document.getElementById("answer-four-form").hidden = false;
+
         document.getElementById("answer-four").focus();
+
       } else {
+
         message.textContent = "Not quite—check the code and try again, babe."; message.classList.remove("success");
+
       }
+
     });
+
     document.getElementById("answer-four-form").addEventListener("submit", event => {
+
       event.preventDefault(); const message = document.getElementById("message-four");
+
       if (document.getElementById("answer-four").value.trim().toLowerCase() === "bridge") {
+
         message.textContent = "Wowowow, babe's correct, nicely done wow. Head to the Bridge!"; message.classList.add("success"); document.getElementById("celebration").hidden = false;
+
         if (bridgeWatchId === null && navigator.geolocation) bridgeWatchId = watchDestination(bridge, message, () => { if (bridgeWatchId !== null) { navigator.geolocation.clearWatch(bridgeWatchId); bridgeWatchId = null; } message.textContent = "You've arrived! Here's the next riddle."; revealStep("step-five", "answer-five"); }, true);
+
         else if (!navigator.geolocation) message.textContent = "Location tracking isn't available in this browser, babe.";
+
       } else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
+
     });
+
     document.getElementById("answer-five-form").addEventListener("submit", event => {
+
       event.preventDefault(); const message = document.getElementById("message-five");
+
       if (document.getElementById("answer-five").value.trim().toLowerCase() === "paopao") {
+
         message.textContent = "Wowowow, babe's correct, nicely done wow. Head to Paopao!"; message.classList.add("success");
+
         if (!navigator.geolocation) { message.textContent = "Location tracking isn't available in this browser. Enable location services to reveal the final task."; return; }
+
         if (paopaoWatchId === null && !paopaoArrived) {
+
           paopaoWatchId = watchDestination(paopao, message, () => {
+
             if (paopaoWatchId !== null) { navigator.geolocation.clearWatch(paopaoWatchId); paopaoWatchId = null; }
+
             paopaoArrived = true;
+
             message.textContent = "You've arrived at Paopao! Here's the final task.";
+
             revealStep("step-six", "final-answer");
+
           });
+
           if (paopaoWatchId !== null) message.textContent = "Head to Paopao and keep this page open. The final task unlocks when you arrive.";
+
         }
+
       } else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
+
     });
+
     document.getElementById("emergency-button").addEventListener("click", () => {
+
       const panel = document.getElementById("emergency-panel"), input = document.getElementById("emergency-code");
+
       panel.hidden = !panel.hidden;
+
       input.value = "";
+
       document.getElementById("emergency-button").setAttribute("aria-expanded", String(!panel.hidden));
+
       if (!panel.hidden) input.focus();
+
     });
+
     document.getElementById("emergency-form").addEventListener("submit", event => {
+
       event.preventDefault();
+
       const input = document.getElementById("emergency-code"), code = input.value;
+
       input.value = "";
+
       const message = document.getElementById("emergency-message");
+
       if (advanceEmergency(code)) { message.textContent = "Got you, babe! The next question or task is ready."; message.classList.add("success"); document.getElementById("emergency-panel").hidden = true; document.getElementById("emergency-button").setAttribute("aria-expanded", "false"); }
+
       else { message.textContent = "That code didn't unlock a new step—check the code and try again, babe."; message.classList.remove("success"); }
+
     });
+
     document.getElementById("final-answer-form").addEventListener("submit", event => {
+
       event.preventDefault(); const answer = document.getElementById("final-answer").value.trim().toLowerCase(), message = document.getElementById("final-message");
+
       if (answer === "next to me") { message.textContent = "Wowowow, babe's correct, nicely done wow."; message.classList.add("success"); if (!celebrationStarted) { celebrationStarted = true; document.body.classList.add("celebrating"); showCelebration(); } }
+
       else if (answer === "the past") { message.textContent = "ahihi nice try. It's an accepted answer but it's not what I have in mind"; message.classList.remove("success"); }
+
       else { message.textContent = "also an accepted answer but it's not what I have in mind"; message.classList.remove("success"); }
+
     });
+
   </script>
+
 </body>
+
 </html>
