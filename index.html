@@ -36,7 +36,7 @@
     .map-link { margin-top: 16px; }
     .walking { margin-top: 24px; }
     .walking p { font-size: 1.05rem; line-height: 1.55; }
-    .walking iframe { display: block; width: 100%; max-width: 400px; height: 250px; margin: 16px auto; border: 0; border-radius: 12px; }
+    .walking iframe, .celebration iframe { display: block; width: 100%; max-width: 400px; height: 250px; margin: 16px auto; border: 0; border-radius: 12px; }
     .bridge-art { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 5vw, 40px); margin: 12px 0 24px; padding: 20px; border-radius: 20px; background: #fff4f5; }
     .bridge-art svg { width: min(48%, 210px); height: auto; }
     .finger-heart { font-size: clamp(4rem, 18vw, 7rem); line-height: 1; }
@@ -46,8 +46,6 @@
     .emergency-button:hover { background: #812e26; }
     .emergency-panel { position: fixed; z-index: 11; top: max(78px, calc(env(safe-area-inset-top) + 62px)); right: max(16px, env(safe-area-inset-right)); width: min(340px, calc(100vw - 32px)); padding: 20px; border: 1px solid #e6dece; border-radius: 16px; background: #fffdf9; box-shadow: 0 12px 32px rgb(52 43 29 / 18%); }
     .emergency-panel p { margin: 0 0 12px; }
-    .celebration { margin-top: 18px; }
-    .celebration p { font-size: 2rem; text-align: center; }
     body.celebrating { display: block; padding: 0; overflow: hidden; background: #070b20; }
     body.celebrating main { opacity: 0; transform: translateY(-28px) scale(.94); filter: blur(8px); pointer-events: none; }
     #celebration-scene { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; overflow: hidden; color: #fff; background: radial-gradient(ellipse at 50% 110%, #27305d 0, #101631 42%, #050817 100%); opacity: 0; transition: opacity 2.2s ease; }
@@ -73,11 +71,11 @@
 
     <section class="step" id="step-three" aria-labelledby="riddle-three" hidden><p class="step-label">Riddle 3</p><h2 class="riddle" id="riddle-three">Seriously, literally, nobody adores you [more than me ahihi].</h2><form id="answer-three-form"><label for="answer-three">Babe's answer</label><input id="answer-three" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-three" aria-live="polite"></p></form></section>
 
-    <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task 1</p><h2 class="riddle" id="task-four">Babe's task: hug someone to get the next location address</h2><div class="bridge-art" aria-hidden="true">💗</div><div class="timer-controls" id="task-four-timer" hidden><p class="timer" id="task-timer" role="timer" aria-live="polite">45:00</p><button type="button" id="task-early-button">Tell me the next task early</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask for the code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Unlock early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><form id="answer-four-form" hidden><label for="answer-four">Babe's location answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the surprise</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><p aria-label="Happy cat">🐱💗🐟</p></div></section>
+    <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task</p><h2 class="riddle" id="task-four">Babe's task: hug someone to get the next location address</h2><div class="timer-controls" id="task-four-timer" hidden><p class="timer" id="task-timer" role="timer" aria-live="polite">45:00</p><button type="button" id="task-early-button">Tell me the next task early</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask for the code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Unlock early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><form id="answer-four-form" hidden><label for="answer-four">Babe's location answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the surprise</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><iframe src="https://tenor.com/embed/20311095" title="Two cats walking together" loading="lazy" allowfullscreen></iframe></div></section>
 
     <section class="step" id="step-five" aria-labelledby="riddle-five" hidden><p class="step-label">Riddle 4</p><div class="bridge-art" role="img" aria-label="A cute pink shirt and a finger heart">👚💕</div><h2 class="riddle" id="riddle-five">A little clue for babe</h2><form id="answer-five-form"><label for="answer-five">Babe's answer</label><input id="answer-five" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-five" aria-live="polite"></p></form></section>
 
-    <section class="step" id="step-six" aria-labelledby="task-six" hidden><p class="step-label">Final task</p><h2 class="riddle" id="task-six">Babe's task: take a picture and ask for the next location</h2><form id="final-answer-form"><label for="final-answer">Final location answer</label><input id="final-answer" type="text" autocomplete="off" required><button type="submit">Reveal the ending</button><p class="message" id="final-message" aria-live="polite"></p></form></section>
+    <section class="step" id="step-six" aria-labelledby="task-six" hidden><p class="step-label">Task</p><h2 class="riddle" id="task-six">Babe's task: take a picture and ask for the next location</h2><iframe class="walking-gif" src="https://tenor.com/embed/20311095" title="Two cats walking together" loading="lazy" allowfullscreen></iframe><form id="final-answer-form"><label for="final-answer">Final location answer</label><input id="final-answer" type="text" autocomplete="off" required><button type="submit">Reveal the ending</button><p class="message" id="final-message" aria-live="polite"></p></form></section>
   </main>
 
   <button class="emergency-button" id="emergency-button" type="button" aria-expanded="false" aria-controls="emergency-panel">Emergency</button>
@@ -147,10 +145,7 @@
       const resize = () => { const scale = window.devicePixelRatio || 1; canvas.width = window.innerWidth * scale; canvas.height = window.innerHeight * scale; context.setTransform(scale, 0, 0, scale, 0, 0); };
       resize(); window.addEventListener("resize", resize);
       const colors = ["#e84a70", "#f4b942", "#805ad5", "#38a3a5", "#ff7b54", "#fff2bd"], particles = [];
-      function burst() {
-        const x = window.innerWidth * (.12 + Math.random() * .76), y = window.innerHeight * (.12 + Math.random() * .58);
-        for (let i = 0; i < 55; i++) { const angle = Math.PI * 2 * i / 55, speed = 1.1 + Math.random() * 4.5; particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 75 + Math.random() * 35, color: colors[Math.floor(Math.random() * colors.length)] }); }
-      }
+      function burst() { const x = window.innerWidth * (.12 + Math.random() * .76), y = window.innerHeight * (.12 + Math.random() * .58); for (let i = 0; i < 55; i++) { const angle = Math.PI * 2 * i / 55, speed = 1.1 + Math.random() * 4.5; particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 75 + Math.random() * 35, color: colors[Math.floor(Math.random() * colors.length)] }); } }
       let frame = 0;
       function animate() {
         context.clearRect(0, 0, window.innerWidth, window.innerHeight); if (frame % 42 === 0) burst();
@@ -159,10 +154,7 @@
       }
       requestAnimationFrame(animate);
     }
-    function showCelebration() {
-      const scene = document.getElementById("celebration-scene"); scene.hidden = false;
-      requestAnimationFrame(() => { scene.classList.add("visible"); launchFireworks(); });
-    }
+    function showCelebration() { const scene = document.getElementById("celebration-scene"); scene.hidden = false; requestAnimationFrame(() => { scene.classList.add("visible"); launchFireworks(); }); }
 
     document.getElementById("answer-one-form").addEventListener("submit", event => {
       event.preventDefault(); const message = document.getElementById("message-one");
