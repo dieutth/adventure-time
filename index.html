@@ -3,73 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fff0f5">
+  <meta name="theme-color" content="#f6f1e8">
   <title>Travel around town with babe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { color-scheme: light; font-family: "Fredoka", "Trebuchet MS", system-ui, sans-serif; font-size: 18px; color: #493448; background: #fff0f5; }
+    :root { color-scheme: light; font-family: "Fredoka", "Trebuchet MS", system-ui, sans-serif; font-size: 18px; color: #25231f; background: #f6f1e8; }
     * { box-sizing: border-box; }
-    body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 32px 20px; overflow-x: hidden; background: radial-gradient(ellipse at 12% 15%, #fff 0, transparent 34%), linear-gradient(145deg, #fff4f7, #fce4ee 55%, #f9e9ff); }
-    body::before, body::after { position: fixed; z-index: -1; color: #e89ab9; opacity: .48; font-size: 3rem; pointer-events: none; content: "✿"; animation: drift 12s ease-in-out infinite alternate; }
-    body::before { top: 16%; left: 7%; } body::after { right: 12%; bottom: 12%; font-size: 2rem; animation-delay: -5s; }
-    @keyframes drift { to { transform: translate(22px, 30px) rotate(35deg); } }
-    .sun { position: fixed; z-index: 3; top: max(20px, env(safe-area-inset-top)); right: max(22px, env(safe-area-inset-right)); width: 92px; height: 92px; border-radius: 50%; display: grid; place-items: center; color: #a74b49; font-size: 1.25rem; background: radial-gradient(circle at 34% 28%, #fffbe0 0 7%, #ffe98d 18%, #ffc852 57%, #ff9f70 100%); box-shadow: 0 0 0 8px #ffd87938, 0 0 30px 12px #ffbd5b9c, inset -7px -9px 16px #f28a6170, inset 5px 5px 12px #fff9d6; animation: sun-glow 3s ease-in-out infinite alternate; }
-    .sun::before { position: absolute; inset: -11px; z-index: -1; border-radius: 50%; background: repeating-conic-gradient(#ffc95b 0deg 8deg, transparent 8deg 30deg); content: ""; opacity: .8; }
-    .sun-face { margin-top: 8px; letter-spacing: 3px; text-shadow: 0 1px #fff8; }
-    @keyframes sun-glow { to { transform: translateY(3px) rotate(5deg); filter: saturate(1.12); } }
-    main { width: min(100%, 590px); padding: clamp(24px, 6vw, 48px); border: 1px solid #f3cbd9; border-radius: 30px; background: #fffdfd; box-shadow: 0 22px 65px #a2477030, 0 4px 14px #f6c2d533; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; transition: background 1.6s ease, padding 1.6s ease; }
+    main { width: min(100%, 560px); padding: clamp(24px, 6vw, 48px); border: 1px solid #e6dece; border-radius: 24px; background: #fffdf9; box-shadow: 0 16px 48px rgb(52 43 29 / 9%); }
     .eyebrow-line { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .eyebrow, .step-label { margin: 0; color: #bd6384; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    h1 { margin: 0; color: #783e69; font-size: clamp(2.2rem, 9vw, 3.4rem); line-height: 1.08; }
-    .intro { margin: 16px 0 30px; color: #87687d; font-size: 1.2rem; font-weight: 600; }
-    .heart { color: #ed729a; font-size: 1.3rem; }
-    .step { padding-top: 24px; border-top: 1px solid #f5dce6; }
+    .eyebrow { margin: 0; color: #8b6842; font-size: .95rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(2.4rem, 9vw, 3.5rem); font-weight: 700; line-height: 1.08; }
+    .intro { margin: 16px 0 32px; color: #68635b; font-size: 1.2rem; font-weight: 600; line-height: 1.5; }
+    .heart { color: #d8293f; font-size: 1.15rem; }
+    .step { padding-top: 24px; border-top: 1px solid #eee8dd; }
     .step[hidden], [hidden] { display: none !important; }
-    .step-label { margin-bottom: 8px; font-size: .95rem; }
-    .riddle { margin: 0 0 20px; color: #543c58; font-size: 1.55rem; line-height: 1.4; }
+    .step-label { margin: 0 0 8px; color: #8b6842; font-size: 1rem; font-weight: 700; }
+    .riddle { margin: 0 0 20px; font-size: 1.55rem; font-weight: 600; line-height: 1.4; }
     form { display: flex; flex-direction: column; gap: 12px; }
-    label { font-weight: 600; }
-    input { width: 100%; padding: 14px 15px; border: 1px solid #e8bfd0; border-radius: 13px; background: #fffafd; color: inherit; font: inherit; }
-    input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #c86a91; outline-offset: 3px; }
-    button, .map-link { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; padding: 12px 18px; border: 0; border-radius: 15px; background: linear-gradient(135deg, #d86f97, #a967a7); color: #fff; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; box-shadow: 0 5px 14px #bd63843b; transition: transform .2s, filter .2s; }
-    button:hover, .map-link:hover { transform: translateY(-2px); filter: brightness(1.06); }
-    .message { min-height: 1.5em; margin: 4px 0 0; color: #ad4963; line-height: 1.5; }
-    .message.success { color: #397c63; }
-    .riddle-closure { margin-top: 18px; padding: 14px; border: 1px solid #f3d4e0; border-radius: 22px; background: linear-gradient(145deg, #fff4f8, #fffafd); box-shadow: 0 12px 30px #bd638425; text-align: center; animation: reveal .7s ease both; }
-    .riddle-closure img { display: block; width: 100%; max-width: 420px; height: auto; max-height: 360px; object-fit: contain; margin: 0 auto; border-radius: 14px; }
-    .closure-caption { margin: 12px 0; color: #845f79; font-weight: 600; }
+    label { font-size: 1.05rem; font-weight: 600; }
+    input { width: 100%; padding: 14px 15px; border: 1px solid #d8d0c3; border-radius: 12px; background: #fff; color: inherit; font: inherit; }
+    input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #c9975b; outline-offset: 3px; }
+    button, .map-link { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; padding: 12px 18px; border: 0; border-radius: 14px; background: #765435; color: #fff; font: inherit; font-size: 1.05rem; font-weight: 700; text-decoration: none; cursor: pointer; }
+    button:hover, .map-link:hover { background: #5e4028; }
+    .message { min-height: 1.5em; margin: 4px 0 0; color: #a13d32; font-size: 1rem; line-height: 1.5; }
+    .message.success { color: #286342; }
+    .riddle-closure { margin-top: 18px; padding: 14px; border: 1px solid #e6dece; border-radius: 18px; background: #fffaf7; text-align: center; }
+    .riddle-closure img { display: block; width: 100%; max-width: 420px; height: auto; max-height: 360px; object-fit: contain; margin: 0 auto; border-radius: 12px; }
+    .closure-caption { margin: 12px 0; color: #68635b; font-weight: 600; }
     .map-link { margin-top: 16px; }
-    .walking { margin-top: 20px; }
-    .walking p { line-height: 1.55; }
-    .walking img { display: block; width: 100%; max-width: 400px; height: auto; max-height: 250px; object-fit: contain; margin: 16px auto; border-radius: 16px; }
-    .bridge-art { margin: 18px 0; padding: 22px; border-radius: 20px; background: #fff0f5; text-align: center; font-size: 4rem; }
+    .walking { margin-top: 24px; }
+    .walking p { font-size: 1.05rem; line-height: 1.55; }
+    .walking img { display: block; width: 100%; max-width: 400px; height: auto; max-height: 250px; object-fit: contain; margin: 16px auto; border-radius: 12px; }
+    .bridge-art { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 5vw, 40px); margin: 12px 0 24px; padding: 20px; border-radius: 20px; background: #fff4f5; }
+    .bridge-art svg { width: min(48%, 210px); height: auto; }
+    .finger-heart { font-size: clamp(4rem, 18vw, 7rem); line-height: 1; }
     .timer-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 16px 0; }
-    .timer { font-size: 1.2rem; font-weight: 700; }
-    .emergency-button { position: fixed; z-index: 5; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); min-height: 42px; padding: 8px 13px; background: #986d94; font-size: .85rem; }
-    .emergency-panel { position: fixed; z-index: 6; top: 68px; left: 16px; width: min(340px, calc(100vw - 32px)); padding: 18px; border: 1px solid #f3cbd9; border-radius: 16px; background: #fffdfd; box-shadow: 0 12px 32px #49344826; }
+    .timer { margin: 0; font-size: 1.2rem; font-weight: 700; }
+    .emergency-button { position: fixed; z-index: 10; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); background: #a13d32; box-shadow: 0 4px 14px rgb(52 43 29 / 20%); }
+    .emergency-button:hover { background: #812e26; }
+    .emergency-panel { position: fixed; z-index: 11; top: max(78px, calc(env(safe-area-inset-top) + 62px)); right: max(16px, env(safe-area-inset-right)); width: min(340px, calc(100vw - 32px)); padding: 20px; border: 1px solid #e6dece; border-radius: 16px; background: #fffdf9; box-shadow: 0 12px 32px rgb(52 43 29 / 18%); }
+    .emergency-panel p { margin: 0 0 12px; }
     .celebration { margin-top: 18px; }
     .celebration p { font-size: 2rem; text-align: center; }
-    @keyframes reveal { from { opacity: 0; transform: translateY(22px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-    .step.revealed { animation: reveal .85s cubic-bezier(.2,.8,.2,1) both; }
-    @media (max-width: 520px) { :root { font-size: 17px; } .sun { width: 68px; height: 68px; top: 14px; right: 15px; font-size: 1rem; } .sun::before { inset: -8px; } main { margin-top: 30px; padding: 24px; } .riddle-closure img { max-height: 280px; } .emergency-button { top: 12px; left: 12px; } }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+    body.celebrating { display: block; padding: 0; overflow: hidden; background: #070b20; }
+    body.celebrating main { opacity: 0; transform: translateY(-28px) scale(.94); filter: blur(8px); pointer-events: none; }
+    #celebration-scene { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; overflow: hidden; color: #fff; background: radial-gradient(ellipse at 50% 110%, #27305d 0, #101631 42%, #050817 100%); opacity: 0; transition: opacity 2.2s ease; }
+    #celebration-scene.visible { opacity: 1; } #celebration-scene[hidden] { display: none; }
+    #fireworks { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .night-stars { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(2px 2px at 12% 18%, #fff 50%, transparent 60%), radial-gradient(1px 1px at 30% 42%, #fff 50%, transparent 60%), radial-gradient(2px 2px at 72% 21%, #ffe9a8 50%, transparent 60%), radial-gradient(1px 1px at 87% 53%, #fff 50%, transparent 60%); }
+    .love-title { z-index: 1; margin: 0; padding: 24px; color: #fff2bd; font-size: clamp(2.5rem, 9vw, 6rem); font-weight: 700; text-align: center; text-shadow: 0 0 12px #ff71a8, 0 0 32px #ff71a8, 0 0 65px #ffb6d2; animation: blink-glow 1s steps(2, start) infinite; }
+    @keyframes blink-glow { 50% { opacity: .3; text-shadow: 0 0 4px #ff71a8; } }
+    .step.revealed { animation: step-reveal .7s ease both; }
+    @keyframes step-reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 420px) { :root { font-size: 17px; } main { padding: 24px; } .riddle { font-size: 1.4rem; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } .love-title { animation: none; } }
   </style>
 </head>
 <body>
-  <div class="sun" aria-label="A sunny little friend" role="img"><span class="sun-face" aria-hidden="true">•ᴗ•</span></div>
   <main id="adventure">
     <div class="eyebrow-line"><p class="eyebrow">A little adventure</p><span class="heart" aria-hidden="true">♥</span></div>
-    <h1>Travel around town with babe</h1><p class="intro">Let's gooooo 🌸</p>
+    <h1>Travel around town with babe</h1><p class="intro">Let's gooooo</p>
 
-    <section class="step" id="step-one" aria-labelledby="riddle-one"><p class="step-label">Riddle 1</p><h2 class="riddle" id="riddle-one">Birthday cake and a gift—what phrase do they make?</h2><form id="answer-one-form"><label for="answer-one">Babe's answer</label><input id="answer-one" type="text" autocomplete="off" required><button type="submit">Unlock the next riddle</button></form><p class="message" id="message-one" aria-live="polite"></p><div class="riddle-closure" id="riddle-one-closure" hidden><img src="https://media.tenor.com/images/48f427b7423716449aed158dad25ab51/tenor.gif" alt="A cartoon cat showing aggressive love" loading="lazy"><p class="closure-caption">Riddle 1 complete! A little love from the kitty 💗</p><button id="continue-to-two" type="button">On to riddle 2 🌸</button></div></section>
+    <section class="step" id="step-one" aria-labelledby="riddle-one"><p class="step-label">Riddle 1</p><h2 class="riddle" id="riddle-one">Birthday cake and a gift—what phrase do they make?</h2><form id="answer-one-form"><label for="answer-one">Babe's answer</label><input id="answer-one" type="text" autocomplete="off" required><button type="submit">Unlock the next riddle</button></form><p class="message" id="message-one" aria-live="polite"></p><div class="riddle-closure" id="riddle-one-closure" hidden><img src="https://media.tenor.com/images/48f427b7423716449aed158dad25ab51/tenor.gif" alt="A cartoon cat showing aggressive love" loading="lazy"><p class="closure-caption">Riddle 1 complete! A little love from the kitty 💗</p><button id="continue-to-two" type="button">On to riddle 2</button></div></section>
 
     <section class="step" id="step-two" aria-labelledby="riddle-two" hidden><p class="step-label">Riddle 2</p><h2 class="riddle" id="riddle-two">Love is in ma babe's hair, plus code</h2><form id="answer-two-form"><label for="answer-two">Babe's location answer</label><input id="answer-two" type="text" autocomplete="off" required><button type="submit">Reveal the location</button><p class="message" id="message-two" aria-live="polite"></p></form><a class="map-link" id="map-link" href="https://maps.app.goo.gl/XodfP79Vf4iRVRui6" target="_blank" rel="noopener noreferrer" hidden>Open Best Cut in Maps</a><div class="walking" id="walking" hidden><p><strong>On your way to Best Cut!</strong> Keep this page open and allow location access. The next riddle will unlock when you arrive.</p><img src="https://media.tenor.com/images/fec4afbbba1de7cae5ce52aafa60fcbf/tenor.gif" alt="Two cats walking together" loading="lazy"><p class="message" id="location-status" aria-live="polite">Waiting for your location…</p></div></section>
 
     <section class="step" id="step-three" aria-labelledby="riddle-three" hidden><p class="step-label">Riddle 3</p><h2 class="riddle" id="riddle-three">Seriously, literally, nobody adores you [more than me ahihi].</h2><form id="answer-three-form"><label for="answer-three">Babe's answer</label><input id="answer-three" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-three" aria-live="polite"></p></form></section>
 
-    <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task 1</p><h2 class="riddle" id="task-four">Babe's task: hug someone to get the next location address</h2><div class="bridge-art" aria-hidden="true">🫂🌸</div><div class="timer-controls" id="task-four-timer" hidden><p class="timer" id="task-timer" role="timer" aria-live="polite">45:00</p><button type="button" id="task-early-button">Tell me the next task early</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask for the code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Unlock early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><form id="answer-four-form" hidden><label for="answer-four">Babe's location answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the surprise</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><p aria-label="Happy cat">🐱💗🐟</p></div></section>
+    <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task 1</p><h2 class="riddle" id="task-four">Babe's task: hug someone to get the next location address</h2><div class="bridge-art" aria-hidden="true">💗</div><div class="timer-controls" id="task-four-timer" hidden><p class="timer" id="task-timer" role="timer" aria-live="polite">45:00</p><button type="button" id="task-early-button">Tell me the next task early</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask for the code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Unlock early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><form id="answer-four-form" hidden><label for="answer-four">Babe's location answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the surprise</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><p aria-label="Happy cat">🐱💗🐟</p></div></section>
 
     <section class="step" id="step-five" aria-labelledby="riddle-five" hidden><p class="step-label">Riddle 4</p><div class="bridge-art" role="img" aria-label="A cute pink shirt and a finger heart">👚💕</div><h2 class="riddle" id="riddle-five">A little clue for babe</h2><form id="answer-five-form"><label for="answer-five">Babe's answer</label><input id="answer-five" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-five" aria-live="polite"></p></form></section>
 
@@ -78,13 +82,14 @@
 
   <button class="emergency-button" id="emergency-button" type="button" aria-expanded="false" aria-controls="emergency-panel">Emergency</button>
   <section class="emergency-panel" id="emergency-panel" aria-label="Emergency test unlock" hidden><p><strong>Passcode to reveal next question</strong></p><form id="emergency-form"><label for="emergency-code">Passcode</label><input id="emergency-code" type="text" autocomplete="off" required><button type="submit">Reveal next question</button><p class="message" id="emergency-message" aria-live="polite"></p></form></section>
+  <section id="celebration-scene" aria-label="Congratulations" aria-live="polite" hidden><div class="night-stars" aria-hidden="true"></div><canvas id="fireworks" aria-hidden="true"></canvas><h2 class="love-title">Random Acts of Love</h2></section>
   <script>
     const bestCut = { latitude: 47.31250324218141, longitude: 8.525313544559133 };
     const bridge = { latitude: 47.3789893011236, longitude: 8.533852655245003 };
     const stepIds = ["step-one", "step-two", "step-three", "step-four", "step-five", "step-six"];
     const stepCodeTargets = { r1: "step-two", r2: "step-three", r3: "step-four", r4: "step-five", r5: "step-six" };
     const arrivalRadiusMeters = 20, maxGpsAccuracyMeters = 50;
-    let bestCutWatchId = null, bridgeWatchId = null, taskTimerId = null, taskUnlockAt = null, nextTaskUnlocked = false;
+    let bestCutWatchId = null, bridgeWatchId = null, taskTimerId = null, taskUnlockAt = null, nextTaskUnlocked = false, celebrationStarted = false;
 
     function revealStep(id, focusId) {
       const step = document.getElementById(id);
@@ -137,26 +142,39 @@
       if (target === "step-four") { document.getElementById("answer-four-form").hidden = false; document.getElementById("task-four-timer").hidden = true; }
       return revealed;
     }
+    function launchFireworks() {
+      const canvas = document.getElementById("fireworks"), context = canvas.getContext("2d");
+      const resize = () => { const scale = window.devicePixelRatio || 1; canvas.width = window.innerWidth * scale; canvas.height = window.innerHeight * scale; context.setTransform(scale, 0, 0, scale, 0, 0); };
+      resize(); window.addEventListener("resize", resize);
+      const colors = ["#e84a70", "#f4b942", "#805ad5", "#38a3a5", "#ff7b54", "#fff2bd"], particles = [];
+      function burst() {
+        const x = window.innerWidth * (.12 + Math.random() * .76), y = window.innerHeight * (.12 + Math.random() * .58);
+        for (let i = 0; i < 55; i++) { const angle = Math.PI * 2 * i / 55, speed = 1.1 + Math.random() * 4.5; particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 75 + Math.random() * 35, color: colors[Math.floor(Math.random() * colors.length)] }); }
+      }
+      let frame = 0;
+      function animate() {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight); if (frame % 42 === 0) burst();
+        for (const p of particles) { if (p.life <= 0) continue; p.x += p.vx; p.y += p.vy; p.vy += .025; p.life--; context.globalAlpha = Math.min(1, p.life / 24); context.fillStyle = p.color; context.beginPath(); context.arc(p.x, p.y, 2.5, 0, Math.PI * 2); context.fill(); }
+        context.globalAlpha = 1; frame++; if (!document.getElementById("celebration-scene").hidden) requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
+    function showCelebration() {
+      const scene = document.getElementById("celebration-scene"); scene.hidden = false;
+      requestAnimationFrame(() => { scene.classList.add("visible"); launchFireworks(); });
+    }
 
     document.getElementById("answer-one-form").addEventListener("submit", event => {
       event.preventDefault(); const message = document.getElementById("message-one");
-      if (document.getElementById("answer-one").value.trim().toLowerCase() === "oh really really") {
-        message.textContent = "Wowowow, babe's correct, nicely done wow."; message.classList.add("success");
-        document.getElementById("answer-one-form").hidden = true; document.getElementById("riddle-one-closure").hidden = false;
-      } else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
+      if (document.getElementById("answer-one").value.trim().toLowerCase() === "oh really really") { message.textContent = "Wowowow, babe's correct, nicely done wow."; message.classList.add("success"); document.getElementById("answer-one-form").hidden = true; document.getElementById("riddle-one-closure").hidden = false; }
+      else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
     });
-    document.getElementById("continue-to-two").addEventListener("click", () => {
-      document.getElementById("step-one").hidden = true; revealStep("step-two", "answer-two");
-    });
+    document.getElementById("continue-to-two").addEventListener("click", () => { document.getElementById("step-one").hidden = true; revealStep("step-two", "answer-two"); });
     document.getElementById("answer-two-form").addEventListener("submit", event => {
       event.preventDefault(); const message = document.getElementById("message-two"), answer = document.getElementById("answer-two").value.trim().toLowerCase().replace(/\s+/g, " ");
       if (answer === "8g6g+x4 adliswil") {
-        message.textContent = "Wowowow, babe's correct, nicely done wow. Head to Best Cut!"; message.classList.add("success");
-        document.getElementById("map-link").hidden = false; document.getElementById("walking").hidden = false;
-        bestCutWatchId = watchDestination(bestCut, document.getElementById("location-status"), () => {
-          if (bestCutWatchId !== null) { navigator.geolocation.clearWatch(bestCutWatchId); bestCutWatchId = null; }
-          document.getElementById("location-status").textContent = "You've arrived at Best Cut! Here's the next riddle."; revealStep("step-three", "answer-three");
-        });
+        message.textContent = "Wowowow, babe's correct, nicely done wow. Head to Best Cut!"; message.classList.add("success"); document.getElementById("map-link").hidden = false; document.getElementById("walking").hidden = false;
+        bestCutWatchId = watchDestination(bestCut, document.getElementById("location-status"), () => { if (bestCutWatchId !== null) { navigator.geolocation.clearWatch(bestCutWatchId); bestCutWatchId = null; } document.getElementById("location-status").textContent = "You've arrived at Best Cut! Here's the next riddle."; revealStep("step-three", "answer-three"); });
       } else { message.textContent = "Hmm, not quite—try again, babe."; message.classList.remove("success"); }
     });
     document.getElementById("answer-three-form").addEventListener("submit", event => {
@@ -174,10 +192,7 @@
       event.preventDefault(); const message = document.getElementById("message-four");
       if (document.getElementById("answer-four").value.trim().toLowerCase() === "bridge") {
         message.textContent = "Wowowow, babe's correct, nicely done wow. Head to the Bridge!"; message.classList.add("success"); document.getElementById("celebration").hidden = false;
-        if (bridgeWatchId === null && navigator.geolocation) bridgeWatchId = watchDestination(bridge, message, () => {
-          if (bridgeWatchId !== null) { navigator.geolocation.clearWatch(bridgeWatchId); bridgeWatchId = null; }
-          message.textContent = "You've arrived! Here's the next riddle."; revealStep("step-five", "answer-five");
-        }, true);
+        if (bridgeWatchId === null && navigator.geolocation) bridgeWatchId = watchDestination(bridge, message, () => { if (bridgeWatchId !== null) { navigator.geolocation.clearWatch(bridgeWatchId); bridgeWatchId = null; } message.textContent = "You've arrived! Here's the next riddle."; revealStep("step-five", "answer-five"); }, true);
         else if (!navigator.geolocation) message.textContent = "Location tracking isn't available in this browser, babe.";
       } else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
     });
@@ -186,10 +201,7 @@
       if (document.getElementById("answer-five").value.trim().toLowerCase() === "paopao") { message.textContent = "Wowowow, babe's correct, nicely done wow."; message.classList.add("success"); revealStep("step-six", "final-answer"); }
       else { message.textContent = "Not quite—try again, babe."; message.classList.remove("success"); }
     });
-    document.getElementById("emergency-button").addEventListener("click", () => {
-      const panel = document.getElementById("emergency-panel"); panel.hidden = !panel.hidden; document.getElementById("emergency-button").setAttribute("aria-expanded", String(!panel.hidden));
-      if (!panel.hidden) document.getElementById("emergency-code").focus();
-    });
+    document.getElementById("emergency-button").addEventListener("click", () => { const panel = document.getElementById("emergency-panel"); panel.hidden = !panel.hidden; document.getElementById("emergency-button").setAttribute("aria-expanded", String(!panel.hidden)); if (!panel.hidden) document.getElementById("emergency-code").focus(); });
     document.getElementById("emergency-form").addEventListener("submit", event => {
       event.preventDefault(); const message = document.getElementById("emergency-message");
       if (advanceEmergency(document.getElementById("emergency-code").value)) { message.textContent = "Got you, babe! The next question or task is ready."; message.classList.add("success"); document.getElementById("emergency-panel").hidden = true; document.getElementById("emergency-button").setAttribute("aria-expanded", "false"); }
@@ -197,7 +209,7 @@
     });
     document.getElementById("final-answer-form").addEventListener("submit", event => {
       event.preventDefault(); const answer = document.getElementById("final-answer").value.trim().toLowerCase(), message = document.getElementById("final-message");
-      if (answer === "next to me") { message.textContent = "Wowowow, babe's correct, nicely done wow. 💖🌸✨"; message.classList.add("success"); }
+      if (answer === "next to me") { message.textContent = "Wowowow, babe's correct, nicely done wow."; message.classList.add("success"); if (!celebrationStarted) { celebrationStarted = true; document.body.classList.add("celebrating"); showCelebration(); } }
       else if (answer === "the past") { message.textContent = "ahihi nice try. It's an accepted answer but it's not what I have in mind"; message.classList.remove("success"); }
       else { message.textContent = "also an accepted answer but it's not what I have in mind"; message.classList.remove("success"); }
     });
