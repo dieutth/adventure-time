@@ -26,7 +26,7 @@
     label { font-size: 1.05rem; font-weight: 600; }
     input { width: 100%; padding: 14px 15px; border: 1px solid #d8d0c3; border-radius: 12px; background: #fff; color: inherit; font: inherit; }
     input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #c9975b; outline-offset: 3px; }
-    button, .map-link { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; padding: 12px 18px; border: 0; border-radius: 14px; background: #765435; color: #fff; font: inherit; font-size: 1.05rem; font-weight: 700; text-decoration: none; cursor: pointer; }
+    button, .map-link { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; padding: 12px 18px; border: 0; border-radius: 14px; background: #765435; color: #fff; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
     button:hover, .map-link:hover { background: #5e4028; }
     .message { min-height: 1.5em; margin: 4px 0 0; color: #a13d32; font-size: 1rem; line-height: 1.5; }
     .message.success { color: #286342; }
@@ -43,21 +43,21 @@
     .task-reveal { margin: 18px 0; padding: 20px; border: 1px solid #e6dece; border-radius: 18px; background: #fffaf7; text-align: center; }
     .task-reveal-title { margin: 0 0 10px; color: #765435; font-size: 1.1rem; font-weight: 700; }
     .timer { margin: 0; color: #493448; font-size: clamp(3rem, 13vw, 4.5rem); font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
-    .dare-box { margin: 16px 0; padding: 18px; border: 1px solid #e6dece; border-radius: 16px; background: #fff; }
-    .dare-box p { margin: 0 0 14px; font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
+    .dare-box, .confirm-box { margin: 16px 0; padding: 18px; border: 1px solid #e6dece; border-radius: 16px; background: #fff; }
+    .dare-box p, .confirm-box p { margin: 0 0 14px; font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
     .dare-task { margin: 18px 0; padding: 16px; border: 1px solid #e6dece; border-radius: 16px; background: #fffaf7; }
     .dare-task p { margin: 0; font-weight: 600; line-height: 1.5; }
-    .emergency-button { position: fixed; z-index: 10; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); background: #a13d32; box-shadow: 0 4px 14px rgb(52 43 29 / 20%); }
+    .emergency-button { position: fixed; z-index: 10; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); background: #a13d32; box-shadow: 0 4px 14px rgb(52 43 29 / 16%); }
     .emergency-button:hover { background: #812e26; }
-    .emergency-panel { position: fixed; z-index: 11; top: max(78px, calc(env(safe-area-inset-top) + 62px)); right: max(16px, env(safe-area-inset-right)); width: min(340px, calc(100vw - 32px)); padding: 20px; border: 1px solid #e6dece; border-radius: 16px; background: #fffdf9; box-shadow: 0 12px 32px rgb(52 43 29 / 18%); }
+    .emergency-panel { position: fixed; z-index: 11; top: max(78px, calc(env(safe-area-inset-top) + 62px)); right: max(16px, env(safe-area-inset-right)); width: min(340px, calc(100vw - 32px)); padding: 18px 18px 16px; border: 1px solid #e6dece; border-radius: 18px; background: #fffdf9; box-shadow: 0 18px 38px rgb(52 43 29 / 10%); }
     .emergency-panel p { margin: 0 0 12px; }
     body.celebrating { display: block; padding: 0; overflow: hidden; background: #070b20; }
     body.celebrating main { opacity: 0; transform: translateY(-28px) scale(.94); filter: blur(8px); pointer-events: none; }
-    #celebration-scene { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; overflow: hidden; color: #fff; background: radial-gradient(ellipse at 50% 110%, #27305d 0, #101631 42%, #050817 100%); opacity: 0; transition: opacity 2.2s ease; }
+    #celebration-scene { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; overflow: hidden; color: #fff; background: radial-gradient(ellipse at 50% 110%, #27305d 0, #101631 52%, #050914 100%); opacity: 0; transition: opacity .4s ease; }
     #celebration-scene.visible { opacity: 1; } #celebration-scene[hidden] { display: none; }
     #fireworks { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .night-stars { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(2px 2px at 12% 18%, #fff 50%, transparent 60%), radial-gradient(1px 1px at 30% 42%, #fff 50%, transparent 60%), radial-gradient(2px 2px at 72% 21%, #ffe9a8 50%, transparent 60%), radial-gradient(1px 1px at 87% 53%, #fff 50%, transparent 60%); }
-    .love-title { z-index: 1; margin: 0; padding: 24px; color: #fff2bd; font-size: clamp(2.5rem, 9vw, 6rem); font-weight: 700; text-align: center; text-shadow: 0 0 12px #ff71a8, 0 0 32px #ff71a8, 0 0 65px #ffb6d2; animation: blink-glow 1s steps(2, start) infinite; }
+    .night-stars { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(2px 2px at 12% 18%, #fff 50%, transparent 60%), radial-gradient(1px 1px at 30% 42%, #fff 50%, transparent 60%), radial-gradient(2px 2px at 50% 70%, #fff 50%, transparent 60%), radial-gradient(1px 1px at 74% 24%, #fff 50%, transparent 60%), radial-gradient(1px 1px at 88% 80%, #fff 50%, transparent 60%); opacity: .85; }
+    .love-title { z-index: 1; margin: 0; padding: 24px; color: #fff2bd; font-size: clamp(2.5rem, 9vw, 6rem); font-weight: 700; text-align: center; text-shadow: 0 0 12px #ff71a8, 0 0 32px #ff71a8, 0 0 48px #ff71a8; animation: blink-glow 2.5s ease-in-out infinite; }
     @keyframes blink-glow { 50% { opacity: .3; text-shadow: 0 0 4px #ff71a8; } }
     .step.revealed { animation: step-reveal .7s ease both; }
     @keyframes step-reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
@@ -76,7 +76,7 @@
 
     <section class="step" id="step-three" aria-labelledby="riddle-three" hidden><p class="step-label">Riddle 3</p><h2 class="riddle" id="riddle-three">Seriously, literally, nobody adores you [more than me ahihi].</h2><form id="answer-three-form"><label for="answer-three">Babe's answer</label><input id="answer-three" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-three" aria-live="polite"></p></form></section>
 
-    <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task</p><div class="task-reveal" id="task-four-timer" hidden><p class="task-reveal-title">Next Riddle reveal in</p><p class="timer" id="task-timer" role="timer" aria-live="polite">50:00</p></div><div class="dare-box" id="dare-box" hidden><p>I'll do a Dare to have the Riddle showing to me Early</p><button type="button" id="task-early-button">I'll do a dare</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask babe for the dare code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Reveal it early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><div class="dare-task" id="dare-task" hidden><p>Babe's task: sing a full song, then give a hug.</p></div><form id="answer-four-form" hidden><h2 class="riddle" id="riddle-four">Noodle me this: I am a path that walks on air. To cross the void, if you should dare.</h2><label for="answer-four">Babe's answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the location</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><iframe src="https://tenor.com/embed/20311095" title="Two cats walking together" loading="lazy" allowfullscreen></iframe></div></section>
+    <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task</p><div class="task-reveal" id="task-four-timer" hidden><p class="task-reveal-title">Next Riddle reveal in</p><p class="timer" id="task-timer" role="timer" aria-live="polite">50:00</p></div><div class="dare-box" id="dare-box" hidden><p>I'll do a Dare to have the Riddle showing to me Early</p><button type="button" id="task-early-button">I'll do a dare</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask babe for the dare code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Reveal it early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><div class="dare-task" id="dare-task" hidden><p>Babe's task: sing a full song, then give a hug.</p></div><div class="confirm-box" id="confirm-box"><p>Confirm task done</p><form id="task-confirm-form"><label for="task-confirm-code">Code</label><input id="task-confirm-code" type="text" autocomplete="off" required><button type="submit">Confirm task done</button><p class="message" id="task-confirm-message" aria-live="polite"></p></form></div><form id="answer-four-form" hidden><h2 class="riddle" id="riddle-four">Noodle me this: I am a path that walks on air. To cross the void, if you should dare.</h2><label for="answer-four">Babe's answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the location</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><iframe src="https://tenor.com/embed/20311095" title="Two cats walking together" loading="lazy" allowfullscreen></iframe></div></section>
 
     <section class="step" id="step-five" aria-labelledby="riddle-five" hidden><p class="step-label">Riddle 4</p><div class="bridge-art" role="img" aria-label="A cute pink shirt and a finger heart">👚💕</div><form id="answer-five-form"><label for="answer-five">Babe's answer</label><input id="answer-five" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-five" aria-live="polite"></p></form></section>
 
@@ -123,8 +123,9 @@
       if (taskTimerId !== null) { clearInterval(taskTimerId); taskTimerId = null; }
       document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; document.getElementById("task-early-form").hidden = true;
       document.getElementById("dare-task").hidden = !byDare;
-      document.getElementById("answer-four-form").hidden = false;
-      document.getElementById("answer-four").focus();
+      document.getElementById("answer-four-form").hidden = true;
+      document.getElementById("task-confirm-form").hidden = false;
+      document.getElementById("task-confirm-code").focus();
     }
     function updateTimer() {
       if (taskUnlockAt === null || nextTaskUnlocked) return;
@@ -145,15 +146,15 @@
       if (!target) return false;
       const focus = { "step-two": "answer-two", "step-three": "answer-three", "step-four": null, "step-five": "answer-five", "step-six": "final-answer" }[target];
       const revealed = revealStep(target, focus);
-      if (target === "step-four") { document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; document.getElementById("dare-task").hidden = true; document.getElementById("answer-four-form").hidden = false; }
+      if (target === "step-four") { document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; document.getElementById("dare-task").hidden = true; document.getElementById("task-confirm-form").hidden = false; document.getElementById("answer-four-form").hidden = true; }
       return revealed;
     }
     function launchFireworks() {
       const canvas = document.getElementById("fireworks"), context = canvas.getContext("2d");
-      const resize = () => { const scale = window.devicePixelRatio || 1; canvas.width = window.innerWidth * scale; canvas.height = window.innerHeight * scale; context.setTransform(scale, 0, 0, scale, 0, 0); };
+      const resize = () => { const scale = window.devicePixelRatio || 1; canvas.width = window.innerWidth * scale; canvas.height = window.innerHeight * scale; context.setTransform(scale, 0, 0, scale, 0, 0); }
       resize(); window.addEventListener("resize", resize);
       const colors = ["#e84a70", "#f4b942", "#805ad5", "#38a3a5", "#ff7b54", "#fff2bd"], particles = [];
-      function burst() { const x = window.innerWidth * (.12 + Math.random() * .76), y = window.innerHeight * (.12 + Math.random() * .58); for (let i = 0; i < 55; i++) { const angle = Math.PI * 2 * i / 55, speed = 1.1 + Math.random() * 4.5; particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 75 + Math.random() * 35, color: colors[Math.floor(Math.random() * colors.length)] }); } }
+      function burst() { const x = window.innerWidth * (.12 + Math.random() * .76), y = window.innerHeight * (.12 + Math.random() * .58); for (let i = 0; i < 55; i++) { const angle = Math.PI * 2 * i / 55, speed = 1 + Math.random() * 3.5; particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed - 1.2, life: 28 + Math.random() * 12, color: colors[Math.floor(Math.random() * colors.length)] }); } }
       let frame = 0;
       function animate() {
         context.clearRect(0, 0, window.innerWidth, window.innerHeight); if (frame % 42 === 0) burst();
@@ -187,6 +188,17 @@
       event.preventDefault(); const message = document.getElementById("task-early-message");
       if (document.getElementById("task-early-code").value.trim().toLowerCase() === "first of all") { message.textContent = "That's the code! Here's the next riddle early, babe."; message.classList.add("success"); unlockTask(true); }
       else { message.textContent = "That's not the code—try again, babe."; message.classList.remove("success"); }
+    });
+    document.getElementById("task-confirm-form").addEventListener("submit", event => {
+      event.preventDefault(); const message = document.getElementById("task-confirm-message");
+      if (document.getElementById("task-confirm-code").value.trim().toLowerCase() === "literally you could have asked") {
+        message.textContent = "Confirmed. The riddle is ready, babe."; message.classList.add("success");
+        document.getElementById("task-confirm-form").hidden = true;
+        document.getElementById("answer-four-form").hidden = false;
+        document.getElementById("answer-four").focus();
+      } else {
+        message.textContent = "Not quite—check the code and try again, babe."; message.classList.remove("success");
+      }
     });
     document.getElementById("answer-four-form").addEventListener("submit", event => {
       event.preventDefault(); const message = document.getElementById("message-four");
