@@ -11,7 +11,7 @@
   <style>
     :root { color-scheme: light; font-family: "Fredoka", "Trebuchet MS", system-ui, sans-serif; font-size: 18px; color: #25231f; background: #f6f1e8; }
     * { box-sizing: border-box; }
-    body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; transition: background 1.6s ease, padding 1.6s ease; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; }
     main { width: min(100%, 560px); padding: clamp(24px, 6vw, 48px); border: 1px solid #e6dece; border-radius: 24px; background: #fffdf9; box-shadow: 0 16px 48px rgb(52 43 29 / 9%); }
     .eyebrow-line { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
     .eyebrow { margin: 0; color: #8b6842; font-size: .95rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
@@ -36,12 +36,15 @@
     .map-link { margin-top: 16px; }
     .walking { margin-top: 24px; }
     .walking p { font-size: 1.05rem; line-height: 1.55; }
-    .walking iframe, .celebration iframe { display: block; width: 100%; max-width: 400px; height: 250px; margin: 16px auto; border: 0; border-radius: 12px; }
+    .walking iframe, .celebration iframe, .walking-gif { display: block; width: 100%; max-width: 400px; height: 250px; margin: 16px auto; border: 0; border-radius: 12px; }
     .bridge-art { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 5vw, 40px); margin: 12px 0 24px; padding: 20px; border-radius: 20px; background: #fff4f5; }
     .bridge-art svg { width: min(48%, 210px); height: auto; }
     .finger-heart { font-size: clamp(4rem, 18vw, 7rem); line-height: 1; }
-    .timer-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 16px 0; }
-    .timer { margin: 0; font-size: 1.2rem; font-weight: 700; }
+    .task-reveal { margin: 18px 0; padding: 20px; border: 1px solid #e6dece; border-radius: 18px; background: #fffaf7; text-align: center; }
+    .task-reveal-title { margin: 0 0 10px; color: #765435; font-size: 1.1rem; font-weight: 700; }
+    .timer { margin: 0; color: #493448; font-size: clamp(3rem, 13vw, 4.5rem); font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+    .dare-box { margin: 16px 0; padding: 18px; border: 1px solid #e6dece; border-radius: 16px; background: #fff; }
+    .dare-box p { margin: 0 0 14px; font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
     .emergency-button { position: fixed; z-index: 10; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); background: #a13d32; box-shadow: 0 4px 14px rgb(52 43 29 / 20%); }
     .emergency-button:hover { background: #812e26; }
     .emergency-panel { position: fixed; z-index: 11; top: max(78px, calc(env(safe-area-inset-top) + 62px)); right: max(16px, env(safe-area-inset-right)); width: min(340px, calc(100vw - 32px)); padding: 20px; border: 1px solid #e6dece; border-radius: 16px; background: #fffdf9; box-shadow: 0 12px 32px rgb(52 43 29 / 18%); }
@@ -71,7 +74,7 @@
 
     <section class="step" id="step-three" aria-labelledby="riddle-three" hidden><p class="step-label">Riddle 3</p><h2 class="riddle" id="riddle-three">Seriously, literally, nobody adores you [more than me ahihi].</h2><form id="answer-three-form"><label for="answer-three">Babe's answer</label><input id="answer-three" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-three" aria-live="polite"></p></form></section>
 
-    <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task</p><h2 class="riddle" id="task-four">Babe's task: hug someone to get the next location address</h2><div class="timer-controls" id="task-four-timer" hidden><p class="timer" id="task-timer" role="timer" aria-live="polite">45:00</p><button type="button" id="task-early-button">Tell me the next task early</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask for the code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Unlock early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><form id="answer-four-form" hidden><label for="answer-four">Babe's location answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the surprise</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><iframe src="https://tenor.com/embed/20311095" title="Two cats walking together" loading="lazy" allowfullscreen></iframe></div></section>
+    <section class="step" id="step-four" aria-labelledby="task-four" hidden><p class="step-label">Task</p><h2 class="riddle" id="task-four">Babe's task: hug someone to get the next location address</h2><div class="task-reveal" id="task-four-timer" hidden><p class="task-reveal-title">Next Riddle reveal in</p><p class="timer" id="task-timer" role="timer" aria-live="polite">45:00</p></div><div class="dare-box"><p>I'll do a Dare to have the Riddle showing to me Early</p><button type="button" id="task-early-button">I'll do a dare</button></div><form id="task-early-form" hidden><label for="task-early-code">Ask babe for the dare code</label><input id="task-early-code" type="text" autocomplete="off" required><button type="submit">Reveal it early</button><p class="message" id="task-early-message" aria-live="polite"></p></form><form id="answer-four-form" hidden><label for="answer-four">Babe's location answer</label><input id="answer-four" type="text" autocomplete="off" required><button type="submit">Reveal the surprise</button><p class="message" id="message-four" aria-live="polite"></p></form><div class="celebration" id="celebration" hidden><iframe src="https://tenor.com/embed/20311095" title="Two cats walking together" loading="lazy" allowfullscreen></iframe></div></section>
 
     <section class="step" id="step-five" aria-labelledby="riddle-five" hidden><p class="step-label">Riddle 4</p><div class="bridge-art" role="img" aria-label="A cute pink shirt and a finger heart">👚💕</div><h2 class="riddle" id="riddle-five">A little clue for babe</h2><form id="answer-five-form"><label for="answer-five">Babe's answer</label><input id="answer-five" type="text" autocomplete="off" required><button type="submit">Check your answer</button><p class="message" id="message-five" aria-live="polite"></p></form></section>
 
@@ -114,15 +117,16 @@
     }
     function unlockTask() {
       if (nextTaskUnlocked) return;
-      nextTaskUnlocked = true; if (taskTimerId !== null) clearInterval(taskTimerId);
-      document.getElementById("task-four-timer").hidden = true; document.getElementById("task-early-form").hidden = true;
+      nextTaskUnlocked = true;
+      if (taskTimerId !== null) { clearInterval(taskTimerId); taskTimerId = null; }
+      document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; document.getElementById("task-early-form").hidden = true;
       document.getElementById("answer-four-form").hidden = false; document.getElementById("answer-four").focus();
     }
     function updateTimer() {
       if (taskUnlockAt === null || nextTaskUnlocked) return;
       const remaining = Math.max(0, Math.ceil((taskUnlockAt - Date.now()) / 1000));
       document.getElementById("task-timer").textContent = `${String(Math.floor(remaining / 60)).padStart(2, "0")}:${String(remaining % 60).padStart(2, "0")}`;
-      if (!remaining) unlockTask();
+      if (remaining === 0) unlockTask();
     }
     function startTimer() {
       if (taskUnlockAt !== null) return;
@@ -137,7 +141,7 @@
       if (!target) return false;
       const focus = { "step-two": "answer-two", "step-three": "answer-three", "step-four": null, "step-five": "answer-five", "step-six": "final-answer" }[target];
       const revealed = revealStep(target, focus);
-      if (target === "step-four") { document.getElementById("answer-four-form").hidden = false; document.getElementById("task-four-timer").hidden = true; }
+      if (target === "step-four") { document.getElementById("answer-four-form").hidden = false; document.getElementById("task-four-timer").hidden = true; document.getElementById("dare-box").hidden = true; }
       return revealed;
     }
     function launchFireworks() {
